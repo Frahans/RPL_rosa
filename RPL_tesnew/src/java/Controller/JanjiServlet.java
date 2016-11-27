@@ -21,7 +21,7 @@ import sun.security.pkcs11.wrapper.Functions;
  * @author Frans
  */
 @WebServlet(name = "bJanji", urlPatterns = {"/bJanji"})
-public class bJanji extends HttpServlet {
+public class JanjiServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
