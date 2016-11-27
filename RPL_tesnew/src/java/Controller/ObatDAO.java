@@ -6,10 +6,12 @@
 package Controller;
 
 import Model.Obat;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -59,5 +61,29 @@ public class ObatDAO {
             }
         }
         return obatList;
+    }
+
+    public void HapusDataObat(String[] idBarang) {
+        Connection conn = null;
+        PreparedStatement statment1 = null;
+
+        try {
+            conn = Koneksi.koneksi.getKoneksi();
+            String query;
+            
+            for (int i = 0; i < idBarang.length; i++) {
+                
+                query = "DELETE FROM obat WHERE KODE_OBAT= ?";
+                statment1 = conn.prepareStatement(query);
+                statment1.setString(1, idBarang[i]);
+                statment1.executeUpdate();
+                conn.commit();
+            }
+
+            conn.commit();
+            conn.close();
+        } catch (SQLException | HeadlessException ex) {
+            System.out.println(ex);
+        }
     }
 }

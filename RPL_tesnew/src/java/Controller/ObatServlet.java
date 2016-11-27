@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Controller;
 
 import java.io.IOException;
@@ -33,15 +32,20 @@ public class ObatServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
+        ObatDAO o = new ObatDAO();
         String items[];
         items = request.getParameterValues("delete");
-        
-        if (items!=null) {
-            for (int i = 0; i < items.length; i++) {
-                out.println(items[i]);
-            }
-            
+
+        if (items != null) {
+//            for (int i = 0; i < items.length; i++) {
+//                out.println(items[i]);
+//            }
+            System.out.println("obat dengan kode diatas telah di hapus");
+            o.HapusDataObat(items);
+            response.setHeader("Refresh", "2; url=http://localhost:8090/RPL2016/Obat.jsp#about");
         }
+        response.setHeader("Refresh", "0; url=http://localhost:8090/RPL2016/Obat.jsp#about");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
